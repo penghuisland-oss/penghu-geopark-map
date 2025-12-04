@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>澎湖海洋地質公園自然紀念物網頁互動地圖</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <style>
+    html,body{
+  width: 100%;
+  height: 100%;
+  }
+  #map { width: 100%;height: 100%; }
+
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+  var map = L.map('map').setView([23.583760, 119.581764], 12);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  var attractions = [
+  { 
+      name: "鯨魚洞 & 低平火山口湖", 
+      location: [23.655194, 119.519804], 
+      organization: "西嶼鄉小門村", 
+      status: "110年10月29日", 
+      content: "1.自然形成且獨特罕見。2.科學、教育、美學及觀賞價值。",
+      image: "https://i.imgur.com/nHp1SMa.jpeg"
+    },
+    { 
+      name: "赤嶼", 
+      location: [23.598612, 119.675279], 
+      organization: "湖西鄉北寮村", 
+      status: "109年8月12日", 
+      content: "1.自然形成且獨特罕見。2.科學、教育、美學及觀賞價值。",
+      image: "https://i.imgur.com/Vv2pVtz.jpeg"
+    },
+    { 
+      name: "番仔石", 
+      location: [23.594692, 119.676498], 
+      organization: "湖西鄉北寮村", 
+      status: "109年8月12日", 
+      content: "1.自然形成且獨特罕見。2.科學、教育、美學及觀賞價值。",
+      image: "https://i.imgur.com/UKa9f8Q.jpeg"
+    },
+    { 
+      name: "龍埕平台", 
+      location: [23.201469, 119.438809], 
+      organization: "七美鄉中和村(七美嶼東海岸)", 
+      status: "112年10月27日", 
+      content: "1.自然形成且獨特罕見。2.科學、教育、美學及觀賞價值。",
+      image: "https://i.imgur.com/UHMRr1I.jpeg"
+    },
+    { 
+      name: "小臺灣", 
+      location: [23.208281, 119.443802], 
+      organization: "七美鄉東湖村(七美嶼東海岸)", 
+      status: "112年10月27日", 
+      content: "1.自然形成且獨特罕見。2.科學、教育、美學及觀賞價值。",
+      image: "https://i.imgur.com/2lcODVe.jpeg"
+    },
+    { 
+      name: "煙墩山低平火山口", 
+      location: [23.675409, 119.585837], 
+      organization: "白沙鄉後寮村", 
+      status: "111年12月8日公告、112年10月23日修正", 
+      content: "1.自然形成且獨特罕見。2.科學、教育、美學及觀賞價值。",
+      image: "https://i.imgur.com/W9ZrVg5.jpeg"
+    },
+    { 
+      name: "西衛東側火山頸", 
+      location: [23.590541, 119.586789], 
+      organization: "馬公市西衛里", 
+      status: "111年12月8日", 
+      content: "1.自然形成且獨特罕見。2.科學、教育、美學及觀賞價值。",
+      image: "https://i.imgur.com/WWLp0sr.jpeg"
+    },
+    { 
+      name: "西衛西側熔岩池", 
+      location: [23.593868, 119.582084], 
+      organization: "馬公市西衛里", 
+      status: "111年12月8日", 
+      content: "1.自然形成且獨特罕見。2.科學、教育、美學及觀賞價值。",
+      image: "https://i.imgur.com/4fzWrJI.jpeg"
+    },
+    
+  ];
+
+attractions.forEach(attraction => {
+  var marker = L.marker(attraction.location).addTo(map);
+  var popupContent = `
+   <blockquote>
+    <b>${attraction.name}</b><br>
+       ● 地理位置：${attraction.organization}<br>
+       ● 公告時間：${attraction.status}<br>
+       ● 符合之指定基準：<br>
+        ${attraction.content.replace(/\。\s*/g, '.<br>')}<br>
+    <img src="${attraction.image}" style="max-width: 200px; max-height: 200px;" alt="${attraction.name}"/>
+   </blockquote>
+  `;
+  marker.bindPopup(popupContent);
+});
+</script>
+
+</body>
+</html>
